@@ -11,7 +11,7 @@ const Create = styled(Button)({
    color:"white"
   }
 })
-const SignIn = () => {
+const ForgetPassword = () => {
   return (
    <Box  style={{
     backgroundImage: "url(images/img_bg_6.jpg)",
@@ -76,7 +76,17 @@ const SignIn = () => {
           alignItems:"center",
           gap:"20px"
         }}>
-         
+         <Typography sx={{
+            display:"flex",
+            gap:"10px",
+            color:"#d2d2d2"
+          }}>Need help with your password?</Typography>
+         <Typography sx={{
+            display:"flex",
+            gap:"10px",
+            color:"#d2d2d2",
+            textAlign:"center"
+          }}>Enter the email you use for Medical, and we’ll help you create a new password</Typography>
           <TextField  
           sx={{
             '&:hover fieldset': {
@@ -85,18 +95,7 @@ const SignIn = () => {
            }
          }}
           fullWidth type='email' required label="Email Address" id="fullWidth" />
-          <TextField 
-          sx={{
-            '&:hover fieldset': {
-             borderColor: '#13C5DD !important',
-        
-           },
-          
-         }}
-         type='password'
-        required
-         inputProps={{ maxLength: 6 }}
-          fullWidth label="Password" id="fullWidth" />
+       
           <Create
             type='submit'
           variant="contained" sx={{
@@ -104,26 +103,12 @@ const SignIn = () => {
             color:"white",
             width:"100%",
           
-          }}>SignIn</Create>
-          <Typography sx={{
-            display:"flex",
-            gap:"10px",
-            color:"#d2d2d2"
-          }}>Don`t Have Account ?<Link to="/CreateNewAccount" style={{
-            textDecoration:"none",
-            color:"#13C5DD"
-          }}>Create New Account</Link></Typography>
-           <Typography sx={{
-           
-            color:"#d2d2d2"
-          }}><Link to="/ForgetPassword" style={{
-            textDecoration:"none",
-            color:"#13C5DD"
-          }}>Do You forget your password?</Link></Typography>
+          }}>Next</Create>
+         
         </Box>
     </Box>
    </Box>
   )
 }
 
-export default SignIn
+export default ForgetPassword
