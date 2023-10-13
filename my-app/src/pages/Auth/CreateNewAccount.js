@@ -9,20 +9,46 @@ import './sign.css'
 
 import HomePage from '../website/HomePage';
 import DoctorUpload from './DoctorUpload';
+import axios from 'axios';
 const Create = styled(Button)({
   '&:hover': {
     backgroundColor: '#077988',
    color:"white"
   }
 })
+
 const CreateNewAccount = () => {
   const [value, setValue] = React.useState("Patient");
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    console.log(value);
+   
   };
+
+  const [regester,setRegester]=React.useState({
+    name:"",
+    email:"",
+    password:"",
+    
+  })
+
+   const  handleSubmit=async (e)=>{
+    e.preventDefault()
+    try{
+await axios.post('http://localhost:9090/moaaz/api/health/patients',regester)
+
+console.log("sucss")
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+  const handlRegester=(e)=>{
+    setRegester({...regester,[e.target.name]:e.target.value})
+  }
+
   return (
+    
    <Box  style={{
     backgroundImage: "url(images/img_bg_6.jpg)",
     background:
@@ -76,7 +102,9 @@ const CreateNewAccount = () => {
           <Typography variant='h3' sx={{fontWeight:"bold"}}>Medical</Typography>
         </Box>
         <Typography variant='h5'>Create Account</Typography>
-        <Box component="form" sx={{
+        <Box 
+        onSubmit={handleSubmit}
+        component="form" sx={{
           width:{xs:"100%",md:"70%"},
           display:"flex",
           flexDirection:"column",
@@ -86,29 +114,38 @@ const CreateNewAccount = () => {
 
         }}>
           <TextField 
+        name='name'
           className='input'
           type='text'
+          value={regester.name}
+          onChange={handlRegester}
           sx={{
              '&:hover fieldset': {
               borderColor: '#13C5DD !important',
          
             }
-           
+          
           }}
         
           required
-          fullWidth label="Full Name" id="fullWidth" />
+          fullWidth label="Full Name" id="name" />
           <TextField  
           type='email'
+          name='email'
           required
+          value={regester.email}
+          onChange={handlRegester}
           sx={{
             '&:hover fieldset': {
              borderColor: '#13C5DD !important',
         
            }
          }}
-          fullWidth label="Email Address" id="fullWidth" />
+          fullWidth label="Email Address" id="emial" />
           <TextField 
+            value={regester.password}
+            name='password'
+            onChange={handlRegester}
           sx={{
             '&:hover fieldset': {
              borderColor: '#13C5DD !important',
@@ -119,7 +156,7 @@ const CreateNewAccount = () => {
          required
          inputProps={{ maxLength: 6 }}
          type='password'
-          fullWidth label="Password" id="fullWidth" />
+          fullWidth label="Password" id="password" />
             <FormControl
             sx={{
               display: "flex",
